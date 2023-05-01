@@ -1,0 +1,14 @@
+services:
+  webapp:
+    image: webapp
+    command: npm run dev -- --host
+    restart: on-failure
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile
+    ports:
+      - 3000:5173
+      - 24678:24678
+    volumes:
+      - ./webapp:/app
+      - /app/node_modules

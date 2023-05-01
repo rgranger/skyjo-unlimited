@@ -1,0 +1,9 @@
+services:
+  webapp:
+    image: svelte-docker-node
+    ports:
+      - 80:3000
+    build:
+      context: ./webapp
+      dockerfile: Dockerfile.prod
+      target: deploy
