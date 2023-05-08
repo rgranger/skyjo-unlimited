@@ -2,12 +2,14 @@
 	import Card from '@smui/card'
 	import Button from '@smui/button'
 
+	import { socket } from '$lib/ws'
+
 	const handleCreateNewRoom = () => {
-		console.log('create new room')
+		socket?.send('create a room')
 	}
 
 	const handleJoinRoom = () => {
-		console.log('join room')
+		socket?.send('join room')
 	}
 </script>
 
