@@ -1,7 +1,7 @@
 services:
   webapp:
     image: webapp
-    command: npm run dev -- --host
+    command: sh -c "npm i && npm run dev -- --host"
     restart: on-failure
     build:
       context: ./webapp
