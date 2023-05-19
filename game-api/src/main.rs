@@ -32,7 +32,7 @@ async fn main() {
 }
 
 async fn create_websocket_server() {
-    let addr = "127.0.0.1:4000";
+    let addr = "0.0.0.0:4000";
     let try_socket = TcpListener::bind(&addr).await;
     let listener = try_socket.expect("Failed to bind");
     println!("Listening on: {}", &addr);

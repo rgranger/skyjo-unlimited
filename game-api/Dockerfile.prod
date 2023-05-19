@@ -1,0 +1,29 @@
+FROM rust:1.69-slim-buster
+
+# create a new empty shell project
+RUN USER=root cargo new --bin game-api
+WORKDIR /game-api
+
+# copy over your manifests
+COPY ./Cargo.lock ./Cargo.lock
+COPY ./Cargo.toml ./Cargo.toml
+
+# this build step will cache your dependencies
+RUN cargo build --release
+RUN rm src/*.rs
+
+# copy your source tree
+COPY ./src ./src
+
+# build for release
+RUN rm ./target/release/deps/game-api*
+RUN cargo build --release
+
+# our final base
+FROM scratch
+
+# copy the build artifact from the build stage
+COPY --from=build /game-api/target/release/game-api .
+
+# set the startup command to run your binary
+CMD ["./game-api"]

@@ -1,8 +1,8 @@
 services:
   webapp:
-    image: webapp
-    command: npm run dev -- --host
+    command: sh -c "npm i && npm run dev -- --host"
     restart: on-failure
+    working_dir: /webapp
     build:
       context: ./webapp
       dockerfile: Dockerfile
@@ -10,5 +10,16 @@ services:
       - 3000:5173
       - 24678:24678
     volumes:
-      - ./webapp:/app
-      - /app/node_modules
+      - ./webapp:/webapp
+      - /webapp/node_modules
+
+  game-api:
+    command: sh -c "cargo watch -x run"
+    restart: on-failure
+    build:
+      context: ./game-api
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    volumes:
+      - ./game-api:/app
