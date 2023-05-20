@@ -14,12 +14,12 @@ services:
       - /webapp/node_modules
 
   game-api:
-    command: sh -c "cargo watch -x run"
+    command: sh -c "run --watch --allow-net src/main.ts"
     restart: on-failure
     build:
-      context: ./game-api
+      context: ./game-api-2
       dockerfile: Dockerfile
     ports:
       - 4000:4000
     volumes:
-      - ./game-api:/app
+      - ./game-api-2:/app
